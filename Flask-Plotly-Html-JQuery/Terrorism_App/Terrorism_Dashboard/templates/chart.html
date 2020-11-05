@@ -1,0 +1,29 @@
+{% extends "index.html"%}
+{% block content %}
+<h2>Event Charts</h2>
+<div class="container">
+    <div class="row justify-content-end">
+        <div class="col-3">
+          <label> Choose Plot Type </label>
+          <select class="form-control" id ='plot_type'>
+            <option value="Bar">Bar</option>
+            <option value="Scatter">Scatter</option>
+          </select>
+        </div>
+    </div>
+    <br>
+    <br>
+    <div class="row justify-content-centre">
+        <div class="col-6">
+            <div class="chart" id="firstgraph">
+                <script>
+                    var graphs = {{plot | safe}};
+                    Plotly.plot('firstgraph',graphs,{});
+                </script>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="{{ url_for('static', filename='js/jquery-1.11.1.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/plots.js') }}"></script>
+{% endblock %}

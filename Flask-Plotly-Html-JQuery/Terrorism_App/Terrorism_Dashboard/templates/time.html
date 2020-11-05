@@ -1,0 +1,40 @@
+{% extends "index.html"%}
+{% block content %}
+<h2>Time Series</h2>
+<div class="container">
+    <div class="row justify-content-end">
+        <div class="col-3">
+          <label> Choose Time Period </label>
+          <select class="form-control" id ='time_frame'>
+            <option value="Year">Year</option>
+            <option value="Decade">Decade</option>
+            <option value="Month">Month</option>
+            <option value="Day">Day</option>
+            <option value="WeekDay">WeekDay</option>
+          </select>
+        </div>
+        <div class="col-3">
+          <label> Choose Country </label>
+          <select class="form-control" id ='country_frame'>
+            <option value="All">All</option>
+            {% for country in country_list %}
+            <option value="{{country}}"">{{country}}</option>
+            {% endfor %}
+          </select>
+        </div>
+    </div>
+    <br>
+    <div class="row justify-content-centre">
+        <div class="col-12">
+            <div class="chart" id="time-graph">
+                <script>
+                    var graphs = {{plot | safe}};
+                    Plotly.plot('time-graph',graphs,{});
+                </script>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="{{ url_for('static', filename='js/jquery-1.11.1.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/plots.js') }}"></script>
+{% endblock %}
